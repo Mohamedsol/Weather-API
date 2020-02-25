@@ -16,7 +16,10 @@ class App extends React.Component {
     error: ''
   }
   
-
+  calCelsius(temp){
+    let cell = Math.floor(temp - 273.15)
+    return cell;
+  }
 
   getWeather = async (e) => {
     
@@ -27,7 +30,7 @@ class App extends React.Component {
     const data = await api.json()
     if(city && country) {
       this.setState({
-        temperature: data.main.temp,
+        temperature: this.calCelsius(data.main.temp),
         city:data.name,
         country:data.sys.country,
         humidity:data.main.humidity,
